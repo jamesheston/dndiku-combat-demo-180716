@@ -611,19 +611,8 @@ class BundleManager {
     Logger.verbose(`\tLOAD: Classes...`);
     const files = fs.readdirSync(classesDir);
 
-    for (const classFile of files) {
-      const classPath = classesDir + classFile;
-      if (!Data.isScriptFile(classPath, classFile)) {
-        continue;
-      }
-
-      const className = path.basename(classFile, path.extname(classFile));
-      const loader = require(classPath);
-      let classImport = loader(srcPath);
-
-      Logger.verbose(`\t\t${className}`);
-      this.state.ClassManager.set(className, new PlayerClass(className, classImport));
-    }
+    this.state.ClassManager.set('Fighter', new Fighter())
+    this.state.ClassManager.set('Wizard', new Wizard())
 
     Logger.verbose(`\tENDLOAD: Classes...`);
   }
