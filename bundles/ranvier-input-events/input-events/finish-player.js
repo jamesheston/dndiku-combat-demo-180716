@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Finish player creation. Add the character to the account then add the player
  * to the game world
@@ -7,6 +5,8 @@
 module.exports = (srcPath) => {
   const EventUtil = require(srcPath + 'EventUtil');
   const Player = require(srcPath + 'Player');
+  const Fighter = require('../../dndiku-classes/classes/Fighter')
+  const Wizard = require('../../dndiku-classes/classes/Wizard')
 
   return {
     event: state => (socket, args) => {
@@ -15,13 +15,7 @@ module.exports = (srcPath) => {
         account: args.account,
         // TIP:DefaultAttributes: This is where you can change the default attributes for players
         attributes: {
-          health: 100,
-          strength: 20,
-          agility: 20,
-          intellect: 20,
-          stamina: 20,
-          armor: 0,
-          critical: 0
+          health: 1, // never pass 0 here, player will die on a loop
         }
       });
 
@@ -29,6 +23,15 @@ module.exports = (srcPath) => {
       args.account.save();
 
       player.setMeta('class', args.playerClass);
+
+      let pClass
+      // add character creation call on `player` obj here
+      if( args.playerClass === 'Fighter' ) {
+        pClass = new Fighter()
+      } else if ( args.playerClass === 'Wizard' ) {
+        pClass = new Wizard()
+      }
+      pClass.makeChar(player)
 
       const room = state.RoomManager.startingRoom;
       player.room = room;
