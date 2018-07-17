@@ -2,18 +2,20 @@
 
 D20ish combat system for the amazing Ranvier MUD engine!
 
+This is an optional replacement for the ranvier-combat bundle that adds a dice-roll-based combat inspired by the CircleMUDs and tabletop games I grew up playing.
+It is 1 of a set of bundles required to enable this behavior: dndiku-combat dndiku-equipment * dndiku-classes
 
-## How to Install
+## How to Install Premodified Ranvier Clone
 
-You can either modify a virgin ranvier clone using the below steps, or just clone an already modified ranvier build I've set up here: 
 
+## Install Bundles __Manually__ to clean Ranvier clone
 
 #### 1. Download required bundles
 ```
 # download
-git clone https://github.com/jamesheston/dndiku-combat.git
 git clone https://github.com/jamesheston/dndiku-lib.git
-git clone 
+git clone https://github.com/jamesheston/dndiku-combat.git
+git clone https://github.com/jamesheston/dndiku-classes.git
 # remove old bundles from computer
 rm -rf bundles/ranvier-classes
 rm -rf bundles/ranvier-combat
@@ -26,6 +28,7 @@ So remove these lines:
 ```
 ranvier-classes
 ranvier-combat
+ranvier-areas
 ```
 And add these lines:
 ```
@@ -130,7 +133,57 @@ with these lines:
       });
 ```
 
+#### ?. Replace entire `/bundles/ranvier-input-events/input-events/finish-player.js` file contents with the following:
+```
+/**
+ * Finish player creation. Add the character to the account then add the player
+ * to the game world
+ */
+module.exports = (srcPath) => {
+  const EventUtil = require(srcPath + 'EventUtil');
+  const Player = require(srcPath + 'Player');
+  const Fighter = require('../../dndiku-classes/classes/Fighter')
+  const Wizard = require('../../dndiku-classes/classes/Wizard')
 
+  return {
+    event: state => (socket, args) => {
+      let player = new Player({
+        name: args.name,
+        account: args.account,
+        // TIP:DefaultAttributes: This is where you can change the default attributes for players
+        attributes: {
+          health: 1, // never pass 0 here, player will die on a loop
+        }
+      });
+
+      args.account.addCharacter(args.name);
+      args.account.save();
+
+      player.setMeta('class', args.playerClass);
+
+      let pClass
+      // add character creation call on `player` obj here
+      if( args.playerClass === 'Fighter' ) {
+        pClass = new Fighter()
+      } else if ( args.playerClass === 'Wizard' ) {
+        pClass = new Wizard()
+      }
+      pClass.makeChar(player)
+
+      const room = state.RoomManager.startingRoom;
+      player.room = room;
+      player.save();
+
+      // reload from manager so events are set
+      player = state.PlayerManager.loadPlayer(state, player.account, player.name);
+      player.socket = socket;
+
+      socket.emit('done', socket, { player });
+    }
+  };
+};
+
+```
 
 
 
@@ -145,10 +198,11 @@ with these lines:
 
 
 ## Upcoming Features
+* "bash" skill for Fighter class
+* ""
 
 
-
-## Planned Features
+## Design Plan
 
 #### 4 classes:
   1. Fighter
