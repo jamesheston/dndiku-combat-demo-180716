@@ -16,14 +16,14 @@ rm -rf bundles/ranvier-combat
 ```
 
 
-#### 2. Edit `ranvier.config` to enable new bundles and disable old ones
-Remove these lines:
+#### 2. Edit `ranvier.config` 
+First we need to enable new bundles and disable old ones. 
+So remove these lines:
 ```
 ranvier-classes
 ranvier-combat
 ```
-
-Add these lines:
+And add these lines:
 ```
 dndiku-lib,
 dndiku-combat,
@@ -31,8 +31,16 @@ dndiku-classes,
 ```
 And watch your commas!
 
+Also, let's go ahead and change the starting room to be in our ctest area for testing convenience.
 
-#### 3. 
+Replace this old line: 
+```
+  "startingRoom": "limbo:1",
+```
+with this new line:
+```
+  "startingRoom": "ctest:0-0-0",
+```
 
 
 #### ?. Edit src/BundleManager.js 
@@ -53,3 +61,19 @@ So, replace the default BundleManager.loadClasses() method definition with this 
 ```
 
 
+
+## Planned Features
+
+#### 4 classes:
+  1. Fighter
+  2. Wizard
+  3. Thief
+  4. Cleric
+
+#### Spellcasting
+  * Casting duration to spe
+  * Possible item/component requirements for more powerful spells.
+
+
+## Bugs
+* doesn't currently play well with original ranvier-commands/score.js "score" command.
