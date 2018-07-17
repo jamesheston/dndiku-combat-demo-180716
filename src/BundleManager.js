@@ -20,6 +20,9 @@ const fs = require('fs'),
 const srcPath = __dirname + '/';
 const bundlesPath = srcPath + '../bundles/';
 
+const Fighter = require('../bundles/dndiku-classes/classes/Fighter')
+const Wizard = require('../bundles/dndiku-classes/classes/Wizard')
+
 /**
  * Handles loading/parsing/initializing all bundles. AKA where the magic happens
  */

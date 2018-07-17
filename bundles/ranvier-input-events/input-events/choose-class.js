@@ -18,21 +18,23 @@ module.exports = (srcPath) => {
       * Can select existing player
       * Can create new (if less than 3 living chars)
       */
-      say('  Pick your class');
+     say('  Pick your class');
       say(' --------------------------');
       const classes = [...state.ClassManager].map(([id, instance]) => {
-        return [id, instance.config];
+        return [id, instance];
       });
-      for (const [ id, config ] of classes) {
-        say(`[<bold>${id}</bold>] - <bold>${config.name}</bold>`);
-        say(Broadcast.wrap(`      ${config.description}\r\n`, 80));
+      // for (const [ id, config ] of classes) {
+      for (const [ id, instance ] of classes) {
+
+        say(`[<bold>${id}</bold>] - <bold>${instance.name}</bold>`);
+        say(Broadcast.wrap(`      ${instance.description}\r\n`, 80));
       }
       write('> ');
 
       socket.once('data', choice => {
         choice = choice.toString().trim();
-        choice = classes.find(([id, config]) => {
-          return id.includes(choice) || config.name.toLowerCase().includes(choice);
+        choice = classes.find(([id, instance]) => {
+          return id.includes(choice) || instance.name.toLowerCase().includes(choice);
         });
 
         if (!choice) {

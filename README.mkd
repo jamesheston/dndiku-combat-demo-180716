@@ -1,8 +1,12 @@
-# dndiku-combat-demo-180716 - d20ish combat system for the amazing Ranvier MUD engine!
+# dndiku-combat-demo-180716 - custom Ranvier MUD combat system demo
 
+D20ish combat system for the amazing Ranvier MUD engine!
 
 
 ## How to Install
+
+You can either modify a virgin ranvier clone using the below steps, or just clone an already modified ranvier build I've set up here: 
+
 
 #### 1. Download required bundles
 ```
@@ -47,7 +51,13 @@ with this new line:
 
 We need to replace instances of default PlayerClass.js with all player class files () defined in `/bundles/dndiku-classes/classes/*` directory.
 
-So, replace the default BundleManager.loadClasses() method definition with this one:
+So, add these two lines to the top of src/BundleManager.js:
+```
+const Fighter = require('../bundles/dndiku-classes/classes/Fighter')
+const Wizard = require('../bundles/dndiku-classes/classes/Wizard')
+```
+
+And replace the default BundleManager.loadClasses() method definition with this one:
 ```
   loadClasses(bundle, classesDir) {
     Logger.verbose(`\tLOAD: Classes...`);
@@ -59,6 +69,79 @@ So, replace the default BundleManager.loadClasses() method definition with this 
     Logger.verbose(`\tENDLOAD: Classes...`);
   }
 ```
+
+#### ?. Edit `/bundles/ranvier-input-events/input-events/choose-class.js`
+
+replace these lines:
+```
+      say('  Pick your class');
+      say(' --------------------------');
+      const classes = [...state.ClassManager].map(([id, instance]) => {
+        return [id, instance.config];
+      });
+      for (const [ id, config ] of classes) {
+        say(`[<bold>${id}</bold>] - <bold>${config.name}</bold>`);
+        say(Broadcast.wrap(`      ${config.description}\r\n`, 80));
+      }
+      write('> ');
+
+      socket.once('data', choice => {
+        choice = choice.toString().trim();
+        choice = classes.find(([id, config]) => {
+          return id.includes(choice) || config.name.toLowerCase().includes(choice);
+        });
+
+        if (!choice) {
+          return socket.emit('choose-class', socket, args);
+        }
+
+        args.playerClass = choice[0];
+        socket.emit('finish-player', socket, args);
+      });
+```
+
+with these lines:
+```
+     say('  Pick your class');
+      say(' --------------------------');
+      const classes = [...state.ClassManager].map(([id, instance]) => {
+        return [id, instance];
+      });
+      // for (const [ id, config ] of classes) {
+      for (const [ id, instance ] of classes) {
+
+        say(`[<bold>${id}</bold>] - <bold>${instance.name}</bold>`);
+        say(Broadcast.wrap(`      ${instance.description}\r\n`, 80));
+      }
+      write('> ');
+
+      socket.once('data', choice => {
+        choice = choice.toString().trim();
+        choice = classes.find(([id, instance]) => {
+          return id.includes(choice) || instance.name.toLowerCase().includes(choice);
+        });
+
+        if (!choice) {
+          return socket.emit('choose-class', socket, args);
+        }
+
+        args.playerClass = choice[0];
+        socket.emit('finish-player', socket, args);
+      });
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Upcoming Features
