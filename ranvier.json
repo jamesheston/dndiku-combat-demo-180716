@@ -4,6 +4,7 @@
     "dndiku-lib",
     "dndiku-classes",
     "dndiku-combat",
+    "dndiku-aliases",
     "ranvier-telnet",
     "ranvier-websocket",
     "ranvier-channels",
