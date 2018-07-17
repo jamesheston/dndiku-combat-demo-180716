@@ -1,4 +1,4 @@
-# dndiku-combat-demo-180716 - custom Ranvier MUD combat system demo
+# dndiku-combat-demo-180716
 
 D20ish combat system for the amazing Ranvier MUD engine!
 
