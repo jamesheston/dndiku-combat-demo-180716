@@ -5,18 +5,27 @@ D20ish combat system for the amazing Ranvier MUD engine!
 This is an optional replacement for the ranvier-combat bundle that adds a dice-based combat system inspired by the CircleMUDs and tabletop games I grew up playing. MUME in particular is a very heavy influence.
 
 **The system is requires 3 new bundles to work:**
-1. dndiku-lib
-2. dndiku-classes 
-3. dndiku-combat
+  1. dndiku-lib - small utility bundle with functions commonly across multiple bundles
+  2. dndiku-classes - character class combat stats, skills, spells, ...
+  3. dndiku-combat - runs autocombat
 
 **There are also some optional bundles for additional content:**
-* dndiku-monsters
-* dndiku-equipment
+  * dndiku-monsters
+  * dndiku-equipment
 
-## Option 1: Install Premodified Ranvier Fork
+## Option 1: Install premodified Ranvier MUD build
+Much easier: a clean, recent ranvier fork (commit ------) 
 
+```
+git clone https://github.com/jamesheston/dndiku-combat-demo-180716.git
+cd dndiku-combat-demo-180716
+npm install
+npm run bundle-install
+# then just run it
+./ranvier
+```
 
-## Option 2: Install Bundles _*Manually*_ to clean Ranvier clone
+## Option 2: Install bundles and edit src/ _*manually*_ on new Ranvier clone
 
 #### 1. Download required bundles
 ```
