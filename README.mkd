@@ -225,18 +225,19 @@ you *are* finally done!
 #### 4 classes:
   1. Fighter
   2. Wizard
-  3. Thief
+  3. Rogue
   4. Cleric
 
 #### Spellcasting
   * add casting duration, spell speed, and and combat interruptions to spellcasting system
   * Possible item/component requirements for more powerful spells.
 
-#### General skills:
+#### General skills/command:
   * riding: horses, etc
   * track: players and mobs will leave tracks on the ground that can be followed 
   * first aid
-  * 
+  * scan: list npcs, players in adjacent rooms
+  * appraise
 
 ## Bugs
 * doesn't currently play well with original ranvier-commands/score.js "score" command.
