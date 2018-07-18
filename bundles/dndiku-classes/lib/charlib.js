@@ -10,47 +10,47 @@ charlib.rollBaseAbility = function(opts) {
   return total
 }
 
-charlib.getUnarmedWeaponPC = function() {
-  return {
-    name: 'unarmed',
-    metadata: {
-      damageDice: '1d1',
-      magicalModifier: 0,
-      verb: 'hit',
-      range: 0, 
-    }          
-  }  
-}
-charlib.getUnarmedWeaponNPC = function() {
-  return {
-    name: 'unarmed',
-    metadata: {
-      damageDice: '1d1',
-      magicalModifier: 0,
-      verb: 'attack',
-      range: 0, 
-    }          
-  }  
-}
+// charlib.getUnarmedWeaponPC = function() {
+//   return {
+//     name: 'unarmed',
+//     metadata: {
+//       damageDice: '1d1',
+//       magicalModifier: 0,
+//       verb: 'hit',
+//       range: 0, 
+//     }          
+//   }  
+// }
+// charlib.getUnarmedWeaponNPC = function() {
+//   return {
+//     name: 'unarmed',
+//     metadata: {
+//       damageDice: '1d1',
+//       magicalModifier: 0,
+//       verb: 'attack',
+//       range: 0, 
+//     }          
+//   }  
+// }
 
-charlib.getFallbackNpcAutoAttacks = function(character) {
-  let attacks = []
+// charlib.getFallbackNpcAutoAttacks = function(character) {
+//   let attacks = []
 
-  const thac0 = 20 // maybe add code to attempt to pull npc thac0 but prolly no point  
-  const weapon = charlib.getUnarmedWeaponNPC()
+//   const thac0 = 20 // maybe add code to attempt to pull npc thac0 but prolly no point  
+//   const weapon = charlib.getUnarmedWeaponNPC()
 
-  const attack = { 
-    attacksPerRound: 1,
-    weaponName: weapon.name,
-    damageDiceSum: weapon.metadata.damageDice,
-    thac0Sum: thac0,
-    magicalModifier: weapon.metadata.magicalModifier, 
-    verb: weapon.metadata.verb,
-    range: weapon.metadata. range
-  }
+//   const attack = { 
+//     attacksPerRound: 1,
+//     weaponName: weapon.name,
+//     damageDiceSum: weapon.metadata.damageDice,
+//     thac0Sum: thac0,
+//     magicalModifier: weapon.metadata.magicalModifier, 
+//     verb: weapon.metadata.verb,
+//     range: weapon.metadata. range
+//   }
 
-  attacks.push(attack)
+//   attacks.push(attack)
 
-  return attacks
-}
+//   return attacks
+// }
 

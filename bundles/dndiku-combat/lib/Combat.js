@@ -230,41 +230,35 @@ class Combat {
    * Transform attacks data from npcs.yml to the format required by Combat system
    */
   static getNpcAutoAttacks(npc) {
-    let autoAttacks
-    let attacksData = (  attacker.getMeta('autoAttacks')  ) ? attacker.getMeta('autoAttacks') : this.makeFallbackNpcAttackData(attacker) // maybe add default attack for false based on NPC level
+    let autoAttacks = []
+    let aData = (  npc.getMeta('autoAttacks')  ) ? npc.getMeta('autoAttacks') : this.genNpcFallbackAttack(npc) // maybe add default attack for false based on NPC level
+    let thac0 = ( npc.getMeta('thac0') ) ? npc.getMeta('thac0') : 20 // maybe add code to attempt to pull npc thac0 but prolly no point  
 
-    const thac0 = 20 // maybe add code to attempt to pull npc thac0 but prolly no point  
-    const weapon = charlib.getUnarmedWeaponNPC()
-
+    // now transform that data into structure required by autoattack system
     const attack = { 
       attacksPerRound: 1,
-      weaponName: weapon.name,
-      damageDiceSum: weapon.metadata.damageDice,
+      weaponName: aData.name,
+      damageDiceSum: dData.metadata.damageDice,
       thac0Sum: thac0,
       magicalModifier: weapon.metadata.magicalModifier, 
       verb: weapon.metadata.verb,
       range: weapon.metadata. range
     }
 
-    // now transform that data
-
+    autoAttacks.push(attack)
     return autoAttacks
   }
 
-  static makeFallbackNpcAttackData(npc) {
-
-
-
-  return {
-    name: 'unarmed',
-    metadata: {
-      damageDice: '1d1',
-      magicalModifier: 0,
-      verb: 'attack',
-      range: 0, 
-    }          
-  }  
-
+  static genNpcFallbackAttack(npc) {
+    return {
+      name: 'unarmed',
+      metadata: {
+        damageDice: '1d1',
+        magicalModifier: 0,
+        verb: 'attack',
+        range: 0, 
+      }          
+    }  
   }
 
 
