@@ -2,7 +2,7 @@
 
 D20ish combat system for the amazing Ranvier MUD engine!
 
-### This project is currently under construction
+### This project is currently under construction!
 
 This is an optional replacement for the ranvier-combat bundle that adds a combat system inspired by the CircleMUDs and tabletop games I grew up playing. MUME and ADND2 in particular are very heavy influences.
 
@@ -45,19 +45,19 @@ rm -rf bundles/ranvier-combat
 First we need to enable new bundles and disable old ones. 
 So remove these lines:
 ```
-ranvier-classes
-ranvier-combat
-ranvier-areas
+    "ranvier-classes",
+    "ranvier-combat",
+    "ranvier-areas",
 ```
 And add these lines:
 ```
-dndiku-lib,
-dndiku-combat,
-dndiku-classes,
+    "dndiku-lib",
+    "dndiku-combat",
+    "dndiku-classes",
 ```
 And watch your commas!
 
-Also, let's go ahead and change the starting room to be in our ctest area for testing convenience.
+Also, let's go ahead and change the starting room to be in our `ctest` area for testing convenience.
 
 Replace this old line: 
 ```
@@ -65,7 +65,7 @@ Replace this old line:
 ```
 with this new line:
 ```
-  "startingRoom": "ctest:0-0-0",
+  "startingRoom": "ctest:0,0,0",
 ```
 
 
@@ -209,36 +209,3 @@ you *are* finally done!
 
 
 
-
-
-
-
-
-
-## Upcoming Features
-* expanding combat test area with more equipment, mobs
-* basic skills for Fighter: bash, kick, rescue/protect
-* basic spells for Wizard: cure light, armour spell, shield spell, magic missile, burning hands
-* "label" command to assist in targeting 
-
-
-## Design Plan
-
-#### 4 classes:
-  1. Fighter
-  2. Wizard
-  3. Rogue
-  4. Cleric
-
-#### Spellcasting
-  * add casting duration, spell speed, and and combat interruptions to spellcasting system
-  * Possible item/component requirements for more powerful spells.
-
-#### General skills/command:
-  * riding: horses, etc
-  * track: players and mobs will leave tracks on the ground that can be followed 
-  * first aid
-  * scan: list npcs, players in adjacent rooms
-  * appraise
-
-## Current Bugs List
