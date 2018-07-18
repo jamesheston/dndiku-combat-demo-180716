@@ -2,19 +2,21 @@
 
 D20ish combat system for the amazing Ranvier MUD engine!
 
-This is an optional replacement for the ranvier-combat bundle that adds a dice-based combat system inspired by the CircleMUDs and tabletop games I grew up playing. MUME in particular is a very heavy influence.
+### This project is currently under construction
+
+This is an optional replacement for the ranvier-combat bundle that adds a combat system inspired by the CircleMUDs and tabletop games I grew up playing. MUME and ADND2 in particular are very heavy influences.
 
 **The system is requires 3 new bundles to work:**
-  1. dndiku-lib - small utility bundle with functions commonly across multiple bundles
-  2. dndiku-classes - character class combat stats, skills, spells, ...
-  3. dndiku-combat - runs autocombat
+  1. [dndiku-lib](https://github.com/jamesheston/dndiku-lib) - small utility bundle with functions commonly across multiple bundles
+  2. [dndiku-classes](https://github.com/jamesheston/dndiku-classes) - character class combat stats, skills, spells, ...
+  3. [dndiku-combat](https://github.com/jamesheston/dndiku-combat) - runs autocombat
 
 **There are also some optional bundles for additional content:**
-  * dndiku-monsters
-  * dndiku-equipment
+  * [dndiku-monsters]() - unpublished. mobiles content bundle
+  * [dndiku-equipment]() - unpublished. equipment content bundle
 
 ## Option 1: Install premodified Ranvier MUD build
-Much easier: a clean, recent ranvier fork (commit ------) 
+Much easier: a clean, recent ranvier fork (commit c1d081f) with custom bundle already installed and any changes to other ranvier's /src or other necessary bundle files already made.
 
 ```
 git clone https://github.com/jamesheston/dndiku-combat-demo-180716.git
@@ -67,7 +69,7 @@ with this new line:
 ```
 
 
-#### ?. Edit src/BundleManager.js 
+#### 3. Edit src/BundleManager.js 
 
 We need to replace instances of default PlayerClass.js with all player class files () defined in `/bundles/dndiku-classes/classes/*` directory.
 
@@ -90,7 +92,7 @@ And replace the default BundleManager.loadClasses() method definition with this 
   }
 ```
 
-#### ?. Edit `/bundles/ranvier-input-events/input-events/choose-class.js`
+#### 4. Edit `/bundles/ranvier-input-events/input-events/choose-class.js`
 
 replace these lines:
 ```
@@ -150,7 +152,7 @@ with these lines:
       });
 ```
 
-#### ?. Replace entire `/bundles/ranvier-input-events/input-events/finish-player.js` file contents with the following:
+#### 5. Replace entire `/bundles/ranvier-input-events/input-events/finish-player.js` file contents with the following:
 ```
 /**
  * Finish player creation. Add the character to the account then add the player
@@ -217,7 +219,7 @@ you *are* finally done!
 * expanding combat test area with more equipment, mobs
 * basic skills for Fighter: bash, kick, rescue/protect
 * basic spells for Wizard: cure light, armour spell, shield spell, magic missile, burning hands
-* "label" command to assist in targetting 
+* "label" command to assist in targeting 
 
 
 ## Design Plan
@@ -239,5 +241,4 @@ you *are* finally done!
   * scan: list npcs, players in adjacent rooms
   * appraise
 
-## Bugs
-* doesn't currently play well with original ranvier-commands/score.js "score" command.
+## Current Bugs List
