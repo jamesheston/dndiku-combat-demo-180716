@@ -1,6 +1,7 @@
 'use strict';
 
-const Combat = require('../dndiku-combat/lib/Combat');
+const Combat = require('../dndiku-combat/lib/Combat')
+const BasePlayerClass = require('../dndiku-classes/lib/BasePlayerClass')
 const CombatErrors = require('../dndiku-combat/lib/CombatErrors');
 const humanize = (sec) => { return require('humanize-duration')(sec, { round: true }); };
 
@@ -80,6 +81,9 @@ module.exports = srcPath => {
        * Handle player leveling up
        */
       level: state => function () {
+
+        this.playerClass.gainLevel(this)
+
         const abilities = this.playerClass.abilityTable;
         if (!(this.level in this.playerClass.abilityTable)) {
           return;

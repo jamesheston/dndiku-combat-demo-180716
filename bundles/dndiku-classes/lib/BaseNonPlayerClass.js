@@ -14,7 +14,7 @@ class BaseNonPlayerClass {
       const attack = { 
         weaponName: '', // try to ignore this for now
         damageDiceSum: data.damageDice, // no ability modifiers for npcs
-        thac0Sum: ( npc.getMeta('thac0') ) ? npc.getMeta('thac0') : 20 // attack thac0 comes directly from npc thac0, or fall back to 20
+        thac0Sum: ( npc.getMeta('thac0') ) ? npc.getMeta('thac0') : 20, // attack thac0 comes directly from npc thac0, or fall back to 20
         magicalModifier: data.magicalModifier,
         attacksPerRound: data.attacksPerRound,
         verb: data.verb,

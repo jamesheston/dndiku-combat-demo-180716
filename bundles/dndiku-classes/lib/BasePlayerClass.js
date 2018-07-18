@@ -148,14 +148,17 @@ class BasePlayerClass {
   canUseAbility(player, abilityId) {
     return this.getAbilitiesForPlayer(player).includes(abilityId);
   }  
+  gainLevel(player) {
+    this.gainLevelHp(player)
+  }
   gainLevelHp(player) {
     // update health with hitpoints gained for this level
     let newMaxHp = 0
     const oldMaxHp = player.getBaseAttribute('health')
     let hpGained = 0
-    const hitDice = player.metadata.hitDice
+    const hitDice = player.playerClass.hitDice
     const rollResult = Dice.roll(hitDice)
-    const conHpModifier = this.getConHpMod( player.getAttribute('con') )
+    const conHpModifier = this.getConHpMod( player )
     hpGained+= rollResult
     hpGained+= conHpModifier
     newMaxHp = oldMaxHp + hpGained

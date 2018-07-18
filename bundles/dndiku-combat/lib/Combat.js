@@ -99,9 +99,9 @@ class Combat {
     let autoAttacks
 
     if( attacker.isNpc) {
-      BaseNonPlayerClass.getAutoAttacks(attacker)
+      autoAttacks = BaseNonPlayerClass.getAutoAttacks(attacker)
     } else {
-       autoAttacks = attacker.playerClass.getAutoAttacks(attacker)
+      autoAttacks = attacker.playerClass.getAutoAttacks(attacker)
     }      
 
     // Split `autoAttacks`, which is an array of attack types,
