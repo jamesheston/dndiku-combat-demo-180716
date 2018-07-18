@@ -1,8 +1,8 @@
 const Dice = require('../../dndiku-lib/lib/Dice')
-const BaseCharacterClass = require('../../dndiku-classes/lib/BaseCharacterClass')
+const BasePlayerClass = require('../../dndiku-classes/lib/BasePlayerClass')
 const charlib = require('../../dndiku-classes/lib/charlib')
 
-class Fighter extends BaseCharacterClass {
+class Fighter extends BasePlayerClass {
   constructor(props) {
     super(props)
   }

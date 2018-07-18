@@ -4,7 +4,7 @@ const Logger = require('../../../src/Logger')
 const RandomUtil = require('../../../src/RandomUtil')
 const CombatErrors = require('./CombatErrors')
 const Parser = require('../../../src/CommandParser').CommandParser
-const charlib = require('../../dndiku-classes/lib/charlib')
+const BaseNonPlayerClass = require('../../dndiku-classes/lib/BaseNonPlayerClass')
 
 /**
  * This class is an example implementation of a Diku-style real time combat system. Combatants
@@ -99,7 +99,7 @@ class Combat {
     let autoAttacks
 
     if( attacker.isNpc) {
-      this.getNpcAutoAttacks(attacker)
+      BaseNonPlayerClass.getAutoAttacks(attacker)
     } else {
        autoAttacks = attacker.playerClass.getAutoAttacks(attacker)
     }      
@@ -226,40 +226,7 @@ class Combat {
     return subAttacks
   }
 
-  /**
-   * Transform attacks data from npcs.yml to the format required by Combat system
-   */
-  static getNpcAutoAttacks(npc) {
-    let autoAttacks = []
-    let aData = (  npc.getMeta('autoAttacks')  ) ? npc.getMeta('autoAttacks') : this.genNpcFallbackAttack(npc) // maybe add default attack for false based on NPC level
-    let thac0 = ( npc.getMeta('thac0') ) ? npc.getMeta('thac0') : 20 // maybe add code to attempt to pull npc thac0 but prolly no point  
 
-    // now transform that data into structure required by autoattack system
-    const attack = { 
-      attacksPerRound: 1,
-      weaponName: aData.name,
-      damageDiceSum: dData.metadata.damageDice,
-      thac0Sum: thac0,
-      magicalModifier: weapon.metadata.magicalModifier, 
-      verb: weapon.metadata.verb,
-      range: weapon.metadata. range
-    }
-
-    autoAttacks.push(attack)
-    return autoAttacks
-  }
-
-  static genNpcFallbackAttack(npc) {
-    return {
-      name: 'unarmed',
-      metadata: {
-        damageDice: '1d1',
-        magicalModifier: 0,
-        verb: 'attack',
-        range: 0, 
-      }          
-    }  
-  }
 
 
   /**

@@ -1,7 +1,7 @@
 const Dice = require('../../dndiku-lib/lib/Dice')
 const charlib = require('../../dndiku-classes/lib/charlib')
 
-class BaseCharacterClass {
+class BasePlayerClass {
   //-------------------
   // Character creation
   //-------------------
@@ -53,7 +53,7 @@ class BaseCharacterClass {
     // roll & add health for first level 
     let hpGained = 0
     // const hitDice = player.getMeta('hitDice')
-    const hitDice = this.hitDice // should come either from BaseCharacterClass.js or classes/fighter.js, classes/wizard.js, etc.
+    const hitDice = this.hitDice // should come either from BasePlayerClass.js or classes/fighter.js, classes/wizard.js, etc.
     const rollResult = Dice.roll(hitDice)
     const conHpModifier = this.getConHpMod( player )
     hpGained+= rollResult
@@ -469,4 +469,4 @@ class BaseCharacterClass {
 
 }
 
-module.exports = BaseCharacterClass
+module.exports = BasePlayerClass
