@@ -1,0 +1,3 @@
+/*
+Will eventually be extended from BaseNonPlayerClass
+*/
