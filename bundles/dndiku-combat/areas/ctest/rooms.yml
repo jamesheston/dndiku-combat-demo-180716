@@ -3,7 +3,7 @@
   title: "A Nexus"
   coordinates: [0, 0, 0]
   description: ""
-  npcs: ['ctest:rat']
+  npcs: ['ctest:rat', 'ctest:cat']
   items: ['ctest:longsword', 'ctest:platemail', 'ctest:kiteshield']
 
 #1n
@@ -11,11 +11,12 @@
   title: "Arena"
   coordinates: [0, 1, 0]
   description: ""
+  npcs: ['ctest:grizzlybear']
 
 #1e
-- id: 0,1,0
+- id: 1,0,0
   title: "Arena"
-  coordinates: [0, 1, 0]
+  coordinates: [1, 0, 0]
   description: ""
 
 #1s

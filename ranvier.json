@@ -28,7 +28,7 @@
   "maxCharacters": 99,
   "allowMultiplay": true,
   "reportToAdmins": false,
-  "startingRoom": "ctest:0-0-0",
+  "startingRoom": "ctest:0,0,0",
   "moveCommand": "move",
   "skillLag": 2000,
   "defaultMaxPlayerInventory": 16,
