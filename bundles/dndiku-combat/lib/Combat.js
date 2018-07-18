@@ -99,7 +99,7 @@ class Combat {
     let autoAttacks
 
     if( attacker.isNpc) {
-      autoAttacks = (  attacker.getMeta('autoAttacks')  ) ? attacker.getMeta('autoAttacks') : charlib.getFallbackNpcAutoAttacks(attacker) // maybe add default attack for false based on NPC level
+      this.getNpcAutoAttacks(attacker)
     } else {
        autoAttacks = attacker.playerClass.getAutoAttacks(attacker)
     }      
@@ -224,6 +224,47 @@ class Combat {
     }
 
     return subAttacks
+  }
+
+  /**
+   * Transform attacks data from npcs.yml to the format required by Combat system
+   */
+  static getNpcAutoAttacks(npc) {
+    let autoAttacks
+    let attacksData = (  attacker.getMeta('autoAttacks')  ) ? attacker.getMeta('autoAttacks') : this.makeFallbackNpcAttackData(attacker) // maybe add default attack for false based on NPC level
+
+    const thac0 = 20 // maybe add code to attempt to pull npc thac0 but prolly no point  
+    const weapon = charlib.getUnarmedWeaponNPC()
+
+    const attack = { 
+      attacksPerRound: 1,
+      weaponName: weapon.name,
+      damageDiceSum: weapon.metadata.damageDice,
+      thac0Sum: thac0,
+      magicalModifier: weapon.metadata.magicalModifier, 
+      verb: weapon.metadata.verb,
+      range: weapon.metadata. range
+    }
+
+    // now transform that data
+
+    return autoAttacks
+  }
+
+  static makeFallbackNpcAttackData(npc) {
+
+
+
+  return {
+    name: 'unarmed',
+    metadata: {
+      damageDice: '1d1',
+      magicalModifier: 0,
+      verb: 'attack',
+      range: 0, 
+    }          
+  }  
+
   }
 
 
